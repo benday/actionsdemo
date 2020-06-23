@@ -24,6 +24,10 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
+    - name: print environment vars
+      run: env
+    - name: print default working directory
+      run: pwd
     - name: Setup .NET Core
       uses: actions/setup-dotnet@v1
       with:
