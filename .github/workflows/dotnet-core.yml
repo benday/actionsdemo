@@ -1,5 +1,7 @@
 name: .NET Core
 
+solution-root-dir: Benday.Demo123
+
 on:
   push:
     branches: [ master ]
@@ -19,7 +21,10 @@ jobs:
         dotnet-version: 3.1.101
     - name: Install dependencies
       run: dotnet restore
+      working-directory: {{solution-root-dir}}
     - name: Build
       run: dotnet build --configuration Release --no-restore
+      working-directory: {{solution-root-dir}}
     - name: Test
       run: dotnet test --no-restore --verbosity normal
+      working-directory: {{solution-root-dir}}
