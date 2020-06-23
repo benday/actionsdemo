@@ -21,8 +21,8 @@ jobs:
 
     runs-on: ubuntu-latest
 
-    env:
-      PUBLISH_TO_PATH: '${{env.RUNNER_WORKSPACE}}/published'
+    # env:
+    #  PUBLISH_TO_PATH: '${{env.RUNNER_WORKSPACE}}/published'
 
     steps:
     - uses: actions/checkout@v2
@@ -30,6 +30,10 @@ jobs:
       run: env
     - name: print default working directory
       run: pwd
+    - name: set environment variable
+      run: echo "::set-env name=PUBLISH_TO_PATH::${{env.RUNNER_WORKSPACE}}/published"
+    - name: print environment vars again
+      run: env
     - name: Setup .NET Core
       uses: actions/setup-dotnet@v1
       with:
