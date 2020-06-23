@@ -22,7 +22,7 @@ jobs:
     runs-on: ubuntu-latest
 
     env:
-      PUBLISH_TO_PATH: '${{ RUNNER_WORKSPACE }}/published'
+      PUBLISH_TO_PATH: '${{env.RUNNER_WORKSPACE}}/published'
 
     steps:
     - uses: actions/checkout@v2
