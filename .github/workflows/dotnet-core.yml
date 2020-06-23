@@ -31,7 +31,7 @@ jobs:
     - name: print default working directory
       run: pwd
     - name: set environment variable
-      run: echo "::set-env name=PUBLISH_TO_PATH::${{ RUNNER_WORKSPACE }}/published"
+      run: echo "::set-env name=PUBLISH_TO_PATH::${{ env.RUNNER_WORKSPACE }}/published"
     - name: print environment vars again
       run: env
     - name: Setup .NET Core
