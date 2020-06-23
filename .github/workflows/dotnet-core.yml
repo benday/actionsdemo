@@ -10,6 +10,13 @@ on:
   pull_request:
     branches: [ master ]
 
+env:
+  AZURE_WEBAPP_NAME: bdcgithubtest    # set this to your application's name
+  AZURE_WEBAPP_PACKAGE_PATH: 'Benday.Demo123/src/Benday.Demo123.WebUi'      # set this to the path to your web app project, defaults to the repository root
+  PROJECT_TO_PUBLISH_PATH: 'Benday.Demo123/src/Benday.Demo123.WebUi'
+  PUBLISH_TO_PATH: './published'
+  DOTNET_VERSION: '3.1.301'           # set this to the dot net version to use
+
 jobs:
   build:
 
@@ -20,10 +27,19 @@ jobs:
     - name: Setup .NET Core
       uses: actions/setup-dotnet@v1
       with:
-        dotnet-version: 3.1.101
+        dotnet-version: ${{ env.DOTNET_VERSION }}
     - name: Install dependencies
       run: dotnet restore
     - name: Build
       run: dotnet build --configuration Release --no-restore
     - name: Test
       run: dotnet test --no-restore --verbosity normal
+    - name: Publish
+      run: dotnet publish --configuration Release -o '${{ env.PUBLISH_TO_PATH }}'
+      working-directory: '${{ env.PROJECT_TO_PUBLISH_PATH }}'
+    - name: 'Run Azure webapp deploy action using publish profile credentials'
+      uses: azure/webapps-deploy@v2
+      with: 
+        app-name: ${{ env.AZURE_WEBAPP_NAME }}
+        publish-profile: ${{ secrets.AZUREWEBAPPPUBLISHPROFILE  }} # Define secret variable in repository settings as per action documentation
+        package: '${{ env.PUBLISH_TO_PATH }}'
