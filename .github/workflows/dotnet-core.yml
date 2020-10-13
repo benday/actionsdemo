@@ -44,13 +44,13 @@ jobs:
         dotnet-version: ${{ env.DOTNET_VERSION }}
     - name: Install dependencies
       run: dotnet restore
-    # - name: edit connection string
-    #   user: actions/edit-appsettings-db-connection-string
-    #   with:
-    #     pathtosettingsfile: ""
-    #     name: "default"
-    #     connectionstring: "default conn string 123"
-    #   run: dotnet restore
+    - name: edit connection string
+      user: actions/edit-appsettings-db-connection-string
+      with:
+        pathtosettingsfile: "src/Benday.Demo123.WebUi/appsettings.json"
+        name: "default"
+        connectionstring: "default conn string 123"
+      run: dotnet restore
     - name: Build
       run: dotnet build --configuration Release --no-restore
     - name: Test
@@ -58,6 +58,11 @@ jobs:
     - name: Publish
       run: dotnet publish --configuration Release -o '${{ env.PUBLISH_TO_PATH }}'
       working-directory: '${{ env.PROJECT_TO_PUBLISH_PATH }}'
+    - name: publish artifact
+      uses: actions/upload-artifact@v2
+      with: 
+        name: build-output
+        path: '${{ env.PUBLISH_TO_PATH }}'      
     - name: 'Run Azure webapp deploy action using publish profile credentials'
       uses: azure/webapps-deploy@v2
       with: 
