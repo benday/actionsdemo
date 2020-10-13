@@ -5,6 +5,7 @@ defaults:
     working-directory: "Benday.Demo123"
 
 on:
+  workflow_dispatch:
   push:
     branches: [ master ]
   pull_request:
@@ -43,6 +44,13 @@ jobs:
         dotnet-version: ${{ env.DOTNET_VERSION }}
     - name: Install dependencies
       run: dotnet restore
+    # - name: edit connection string
+    #   user: actions/edit-appsettings-db-connection-string
+    #   with:
+    #     pathtosettingsfile: ""
+    #     name: "default"
+    #     connectionstring: "default conn string 123"
+    #   run: dotnet restore
     - name: Build
       run: dotnet build --configuration Release --no-restore
     - name: Test
