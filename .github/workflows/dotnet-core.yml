@@ -31,6 +31,8 @@ jobs:
       run: env
     - name: print default working directory
       run: pwd
+    - name: run an ls -l
+      run: ls -lR
     #
     #
     # Here is the workaround for my env variable wish
