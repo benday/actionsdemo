@@ -45,12 +45,12 @@ jobs:
         dotnet-version: ${{ env.DOTNET_VERSION }}
     - name: Install dependencies
       run: dotnet restore
-    # - name: edit connection string
-    #   uses: benday/github-action-utils@v0.1.1
-    #   with:
-    #     pathtosettingsfile: "src/Benday.Demo123.WebUi/appsettings.json"
-    #     name: "default"
-    #     connectionstring: "default conn string 123"
+    - name: edit connection string
+      uses: benday/github-action-utils@v0.1.2
+      with:
+        pathtosettingsfile: "src/Benday.Demo123.WebUi/appsettings.json"
+        name: "default"
+        connectionstring: "default conn string 123"
     - name: Build
       run: dotnet build --configuration Release --no-restore
     - name: Test
