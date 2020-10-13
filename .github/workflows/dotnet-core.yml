@@ -33,6 +33,7 @@ jobs:
       run: pwd
     - name: run an ls -l
       run: ls -lR
+      working-directory: '${{ github.workspace }}'
     #
     #
     # Here is the workaround for my env variable wish
