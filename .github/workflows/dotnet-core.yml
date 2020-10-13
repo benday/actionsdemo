@@ -39,16 +39,16 @@ jobs:
       run: echo "PUBLISH_TO_PATH=$GITHUB_WORKSPACE/published" >> $GITHUB_ENV
     - name: print environment vars again
       run: env
-    - name: Setup .NET Core
-      uses: actions/setup-dotnet@v1
-      with:
-        dotnet-version: ${{ env.DOTNET_VERSION }}
+    # - name: Setup .NET Core
+    #   uses: actions/setup-dotnet@v1
+    #   with:
+    #     dotnet-version: ${{ env.DOTNET_VERSION }}
     - name: Install dependencies
       run: dotnet restore
     - name: edit connection string
       uses: benday/github-action-utils@v0.1.2
       with:
-        pathtosettingsfile: '${{ env.PWD }}/src/Benday.Demo123.WebUi/appsettings.json'
+        pathtosettingsfile: '${{ github.workspace }}/src/Benday.Demo123.WebUi/appsettings.json'
         name: "default"
         connectionstring: "default conn string 123"
     - name: Build
