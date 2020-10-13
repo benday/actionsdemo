@@ -51,7 +51,7 @@ jobs:
     - name: edit connection string
       uses: benday/github-action-utils@v0.1.2
       with:
-        pathtosettingsfile: '${{ github.workspace }}/src/Benday.Demo123.WebUi/appsettings.json'
+        pathtosettingsfile: '${{ github.workspace }}/Benday.Demo123/src/Benday.Demo123.WebUi/appsettings.json'
         name: "default"
         connectionstring: "default conn string 123"
     - name: Build
