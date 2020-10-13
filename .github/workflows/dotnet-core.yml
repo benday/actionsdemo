@@ -50,7 +50,6 @@ jobs:
         pathtosettingsfile: "src/Benday.Demo123.WebUi/appsettings.json"
         name: "default"
         connectionstring: "default conn string 123"
-      run: dotnet restore
     - name: Build
       run: dotnet build --configuration Release --no-restore
     - name: Test
