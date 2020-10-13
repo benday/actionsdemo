@@ -36,7 +36,7 @@ jobs:
     # Here is the workaround for my env variable wish
     - name: set environment variable
       # run: echo "::set-env name=PUBLISH_TO_PATH::$RUNNER_WORKSPACE/published"
-      run: echo "PUBLISH_TO_PATH=$RUNNER_WORKSPACE/published" >> $GITHUB_ENV
+      run: echo "PUBLISH_TO_PATH=$GITHUB_WORKSPACE/published" >> $GITHUB_ENV
     - name: print environment vars again
       run: env
     - name: Setup .NET Core
@@ -48,7 +48,7 @@ jobs:
     - name: edit connection string
       uses: benday/github-action-utils@v0.1.2
       with:
-        pathtosettingsfile: '${{ env.RUNNER_WORKSPACE }}/src/Benday.Demo123.WebUi/appsettings.json'
+        pathtosettingsfile: '${{ env.PWD }}/src/Benday.Demo123.WebUi/appsettings.json'
         name: "default"
         connectionstring: "default conn string 123"
     - name: Build
