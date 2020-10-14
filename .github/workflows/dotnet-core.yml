@@ -12,7 +12,7 @@ on:
     branches: [ master ]
 
 env:
-  AZURE_WEBAPP_NAME: bdcgithubtest    # set this to your application's name
+  AZURE_WEBAPP_NAME: bdcgithubactiondemo    # set this to your application's name
   AZURE_WEBAPP_PACKAGE_PATH: 'Benday.Demo123/src/Benday.Demo123.WebUi'      # set this to the path to your web app project, defaults to the repository root
   PROJECT_TO_PUBLISH_PATH: 'Benday.Demo123/src/Benday.Demo123.WebUi'
   DOTNET_VERSION: '3.1.301'           # set this to the dot net version to use
