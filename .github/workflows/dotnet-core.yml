@@ -58,6 +58,7 @@ jobs:
         echo ""
         echo "The matrix context is:"
         echo "${{ toJson(matrix) }}"
+        echo ""
     #
     #
     # Here is the workaround for my env variable wish
