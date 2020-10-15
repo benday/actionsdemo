@@ -27,6 +27,11 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
+    - uses: actions/cache@v1
+      with:
+        path: ~/.npm
+        key: npm-packages-${{ hashFiles('**/package-lock.json') }}
+        restore-keys: npm-packages-
     - name: print environment vars
       run: env
     - name: print default working directory
