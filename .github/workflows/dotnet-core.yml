@@ -41,6 +41,7 @@ jobs:
       working-directory: '${{ github.workspace }}'
     - name: Inspect contexts
       run: |
+        echo ""
         echo "The github context is:"
         echo "${{ toJson(github) }}"
         echo ""
