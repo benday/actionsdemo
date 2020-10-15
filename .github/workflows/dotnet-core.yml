@@ -74,7 +74,7 @@ jobs:
     - name: Install dependencies
       run: dotnet restore
     - name: edit connection string
-      uses: benday/action-edit-dbconnstr-in-appsettings@v0.1
+      uses: benday/action-edit-dbconnstr-in-appsettings@main
       with:
         pathtosettingsfile: '${{ github.workspace }}/Benday.Demo123/src/Benday.Demo123.WebUi/appsettings.json'
         name: "default"
