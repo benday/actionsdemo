@@ -81,7 +81,9 @@ jobs:
     #   uses: actions/setup-dotnet@v1
     #   with:
     #     dotnet-version: ${{ env.DOTNET_VERSION }}
-    - name: Install dependencies
+    - name: Restore dotnet tools
+      run: dotnet tool restore
+    - name: Install dependencies for .net core
       run: dotnet restore
     - name: edit connection string
       uses: benday/action-edit-dbconnstr-in-appsettings@main
