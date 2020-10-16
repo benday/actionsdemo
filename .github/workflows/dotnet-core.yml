@@ -24,6 +24,16 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
+    services:
+      sqlserver:
+        image: mcr.microsoft.com/mssql/server:2019-latest
+        ports:
+          - 1433:1433
+        env:
+          - ACCEPT_EULA=Y
+          - SA_PASSWORD=Pa$$word
+          - MSSQL_PID=Standard
+
     steps:
     - uses: actions/checkout@v2
     - uses: actions/cache@v1
@@ -89,6 +99,9 @@ jobs:
         valuetoset: 'asdf asdf'
     - name: Build
       run: dotnet build --configuration Release --no-restore
+    - name: Deploy database migrations to container
+      run: dotnet ef database update
+      working-directory: '${{ github.workspace }}/Benday.Demo123/src/Benday.Demo123.Api'
     - name: Test
       run: dotnet test --no-restore --verbosity normal
     - name: Publish
