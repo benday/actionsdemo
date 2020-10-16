@@ -28,9 +28,9 @@ jobs:
       sqlserver:
         image: mcr.microsoft.com/mssql/server:2019-latest
         env:
-          ACCEPT_EULA=Y
-          SA_PASSWORD=Pa$$word
-          MSSQL_PID=Standard
+          ACCEPT_EULA: Y
+          SA_PASSWORD: Pa$$word
+          MSSQL_PID: Standard
         ports:
         - 1433:1433        
 
