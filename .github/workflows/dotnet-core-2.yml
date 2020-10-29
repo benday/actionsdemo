@@ -89,7 +89,7 @@ jobs:
     - name: Download artifact from a github workflow
       uses: benday/action-download-latest-artifact@v0.1
       with:
-        token: ${{ env.MYGITHUBTOKEN }}'
+        token: '${{ env.MYGITHUBTOKEN }}'
         repository_owner: 'benday'
         repository_name: 'actionsdemo'
         workflow_name: '.NET Core'
