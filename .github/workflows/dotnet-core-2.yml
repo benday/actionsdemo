@@ -90,9 +90,9 @@ jobs:
       uses: benday/action-download-latest-artifact@v0.1
       with:
         token: ${{ env.MYGITHUBTOKEN }}'
-          repository_owner: 'benday'
-          repository_name: 'actionsdemo'
-          workflow_name: '.NET Core'
-          branch_name: 'master'
-          download_path: '${{ github.workspace }}/temp'
-          download_filename: 'actionsdemo-artifact.zip'
+        repository_owner: 'benday'
+        repository_name: 'actionsdemo'
+        workflow_name: '.NET Core'
+        branch_name: 'master'
+        download_path: '${{ github.workspace }}/temp'
+        download_filename: 'actionsdemo-artifact.zip'
