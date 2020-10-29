@@ -115,9 +115,9 @@ jobs:
       with: 
         name: build-output
         path: '${{ env.PUBLISH_TO_PATH }}'      
-    - name: 'Run Azure webapp deploy action using publish profile credentials'
-      uses: azure/webapps-deploy@v2
-      with: 
-        app-name: ${{ env.AZURE_WEBAPP_NAME }}
-        publish-profile: ${{ secrets.AZUREWEBAPPPUBLISHPROFILE  }} # Define secret variable in repository settings as per action documentation
-        package: '${{ env.PUBLISH_TO_PATH }}'
+    # - name: 'Run Azure webapp deploy action using publish profile credentials'
+    #   uses: azure/webapps-deploy@v2
+    #   with: 
+    #     app-name: ${{ env.AZURE_WEBAPP_NAME }}
+    #     publish-profile: ${{ secrets.AZUREWEBAPPPUBLISHPROFILE  }} # Define secret variable in repository settings as per action documentation
+    #     package: '${{ env.PUBLISH_TO_PATH }}'

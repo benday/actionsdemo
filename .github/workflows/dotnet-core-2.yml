@@ -19,7 +19,7 @@ env:
   # 
   # I really want to do this but it doesn't seem to work
   # PUBLISH_TO_PATH: '$RUNNER_WORKSPACE/published'
-
+  MYGITHUBTOKEN: '${{ github.token }}'
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -86,38 +86,13 @@ jobs:
       run: dotnet tool restore
     - name: Install dependencies for .net core
       run: dotnet restore
-    - name: edit connection string
-      uses: benday/action-edit-dbconnstr-in-appsettings@main
+    - name: Download artifact from a github workflow
+      uses: benday/action-download-latest-artifact@v0.1
       with:
-        pathtosettingsfile: '${{ github.workspace }}/Benday.Demo123/src/Benday.Demo123.WebUi/appsettings.json'
-        name: "default"
-        connectionstring: "default conn string 123"
-    - name: Edit property string value in appsettings.json
-      uses: benday/action-set-property-value-in-appsettings@v1.03
-      with:
-        pathtosettingsfile: '${{ github.workspace }}/Benday.Demo123/src/Benday.Demo123.WebUi/appsettings.json'
-        keyname1: 'keylevel1'
-        keyname2: 'keylevel2'
-        keyname3: 'keylevel3'
-        valuetoset: 'asdf asdf'
-    - name: Build
-      run: dotnet build --configuration Release --no-restore
-    - name: Deploy database migrations to container
-      run: dotnet ef database update
-      working-directory: '${{ github.workspace }}/Benday.Demo123/src/Benday.Demo123.Api'
-    - name: Test
-      run: dotnet test --no-restore --verbosity normal
-    - name: Publish
-      run: dotnet publish --configuration Release -o '${{ env.PUBLISH_TO_PATH }}'
-      working-directory: '${{ env.PROJECT_TO_PUBLISH_PATH }}'
-    - name: publish artifact
-      uses: actions/upload-artifact@v2
-      with: 
-        name: build-output
-        path: '${{ env.PUBLISH_TO_PATH }}'      
-    # - name: 'Run Azure webapp deploy action using publish profile credentials'
-    #   uses: azure/webapps-deploy@v2
-    #   with: 
-    #     app-name: ${{ env.AZURE_WEBAPP_NAME }}
-    #     publish-profile: ${{ secrets.AZUREWEBAPPPUBLISHPROFILE  }} # Define secret variable in repository settings as per action documentation
-    #     package: '${{ env.PUBLISH_TO_PATH }}'
+        token: ${{ env.MYGITHUBTOKEN }}'
+          repository_owner: 'benday'
+          repository_name: 'actionsdemo'
+          workflow_name: '.NET Core'
+          branch_name: 'master'
+          download_path: '${{ github.workspace }}/temp'
+          download_filename: 'actionsdemo-artifact.zip'
