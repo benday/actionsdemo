@@ -96,3 +96,7 @@ jobs:
         branch_name: 'master'
         download_path: '${{ github.workspace }}/temp'
         download_filename: 'actionsdemo-artifact.zip'
+    - name: run an ls -l after download
+      run: ls -lR
+      working-directory: '${{ github.workspace }}'
+  
