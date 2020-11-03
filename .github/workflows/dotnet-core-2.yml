@@ -6,6 +6,11 @@ defaults:
 
 on:
   workflow_dispatch:
+    inputs:
+      toEnvironment:
+        description: 'deploy to which environment?'
+        required: true
+        default: 'dev'
   # push:
   #   branches: [ master ]
   # pull_request:
@@ -35,13 +40,15 @@ jobs:
         ports:
         - 1433:1433        
 
-    steps:
+    steps:      
     - uses: actions/checkout@v2
     - uses: actions/cache@v1
       with:
         path: ~/.npm
         key: npm-packages-${{ hashFiles('**/package-lock.json') }}
         restore-keys: npm-packages-
+    - run: |
+        echo "toEnvironment: ${{ github.event.inputs.toEnvironment }}"
     - name: print environment vars
       run: env
     - name: print default working directory
