@@ -26,7 +26,7 @@ env:
   # PUBLISH_TO_PATH: '$RUNNER_WORKSPACE/published'
   MYGITHUBTOKEN: '${{ github.token }}'
 jobs:
-  build:
+  deploy:
     runs-on: ubuntu-latest
     # runs-on: self-hosted
 
@@ -42,8 +42,8 @@ jobs:
 
     steps:      
     # - uses: actions/checkout@v2
-    - run: |
-        echo "toEnvironment: ${{ github.event.inputs.toEnvironment }}"
+    # - run: |
+    #     echo "toEnvironment: ${{ github.event.inputs.toEnvironment }}"
     - name: print environment vars
       run: env
     - name: print default working directory
