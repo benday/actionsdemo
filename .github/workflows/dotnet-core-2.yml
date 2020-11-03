@@ -102,7 +102,7 @@ jobs:
     - name: mkdir for unzipped artifact
       run: mkdir '${{ github.workspace }}/actionsdemo-artifact'
     - name: unzip artifact
-      run: unzip '${{ github.workspace }}/temp/actionsdemo-artifact.zip' '${{ github.workspace }}/actionsdemo-artifact'
+      run: unzip '${{ github.workspace }}/temp/actionsdemo-artifact.zip' -d '${{ github.workspace }}/actionsdemo-artifact'
     - name: run an ls -l after download
       run: ls -lR
       working-directory: '${{ github.workspace }}'
