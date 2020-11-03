@@ -1,8 +1,8 @@
 name: .NET Core 2
 
-defaults:
-  run:
-    working-directory: "Benday.Demo123"
+# defaults:
+#   run:
+#     working-directory: "Benday.Demo123"
 
 on:
   workflow_dispatch:
@@ -41,9 +41,9 @@ jobs:
         - 1433:1433        
 
     steps:      
-    # - uses: actions/checkout@v2
-    # - run: |
-    #     echo "toEnvironment: ${{ github.event.inputs.toEnvironment }}"
+    - uses: actions/checkout@v2
+    - run: |
+        echo "toEnvironment: ${{ github.event.inputs.toEnvironment }}"
     - name: print environment vars
       run: env
     - name: print default working directory
