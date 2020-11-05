@@ -104,3 +104,11 @@ jobs:
     - name: run an ls -l after download
       run: ls -lR
       working-directory: '${{ github.workspace }}'
+    - name: Deploy EF Core migrations from a DLL
+      uses: benday/action-deploy-ef-core-migration@v0.1
+      with:
+        path_to_directory: '${{ github.workspace }}/actionsdemo-artifact'
+        migrations_dll: 'Benday.Demo123.Api.dll'
+        migrations_namespace: 'Benday.Demo123.Api'
+        startup_dll: 'Benday.Demo123.WebUi.dll'
+        dbcontext_class_name: 'MyDbContext'
