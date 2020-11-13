@@ -1,4 +1,4 @@
-name: deploy compiled DLLs
+name: deploy
 
 # defaults:
 #   run:
