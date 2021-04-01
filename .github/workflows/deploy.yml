@@ -85,7 +85,7 @@ jobs:
     # - name: Install dependencies for .net core
     #   run: dotnet restore
     - name: Download artifact from a github workflow
-      uses: benday/action-download-latest-artifact@v0.1
+      uses: benday-inc/download-latest-artifact@v1.0.1
       with:
         token: '${{ env.MYGITHUBTOKEN }}'
         repository_owner: 'benday'
@@ -105,13 +105,13 @@ jobs:
       run: ls -lR
       working-directory: '${{ github.workspace }}'
     - name: Edit .net core database connection string in appsettings.json
-      uses: benday/action-edit-dbconnstr-in-appsettings@v1.0.1
+      uses: benday-inc/edit-dbconnstr-in-appsettings@v1.1
       with:
         name: 'default'
         connectionstring: 'Server=localhost; Database=Benday.Demo123; User Id=sa; Password=${{ secrets.SQL_SERVER_PASSWORD }};'
         pathtosettingsfile: '${{ github.workspace }}/actionsdemo-artifact/appsettings.json'          
     - name: Deploy EF Core migrations from a DLL
-      uses: benday/action-deploy-ef-core-migration@v0.1
+      uses: benday-inc/deploy-ef-core-migration@v1.0
       with:
         path_to_directory: '${{ github.workspace }}/actionsdemo-artifact'
         migrations_dll: 'Benday.Demo123.Api.dll'

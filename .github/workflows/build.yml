@@ -87,13 +87,13 @@ jobs:
     - name: Install dependencies for .net core
       run: dotnet restore
     - name: edit connection string
-      uses: benday/action-edit-dbconnstr-in-appsettings@main
+      uses: benday-inc/edit-dbconnstr-in-appsettings@v1.1
       with:
         pathtosettingsfile: '${{ github.workspace }}/Benday.Demo123/src/Benday.Demo123.WebUi/appsettings.json'
         name: "default"
         connectionstring: "default conn string 123"
     - name: Edit property string value in appsettings.json
-      uses: benday/action-set-property-value-in-appsettings@v1.03
+      uses: benday-inc/set-property-value-in-appsettings@v1.1
       with:
         pathtosettingsfile: '${{ github.workspace }}/Benday.Demo123/src/Benday.Demo123.WebUi/appsettings.json'
         keyname1: 'keylevel1'
