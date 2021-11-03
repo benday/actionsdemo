@@ -15,6 +15,7 @@ env:
   AZURE_WEBAPP_NAME: bdcgithubactiondemo    # set this to your application's name
   AZURE_WEBAPP_PACKAGE_PATH: 'Benday.Demo123/src/Benday.Demo123.WebUi'      # set this to the path to your web app project, defaults to the repository root
   PROJECT_TO_PUBLISH_PATH: 'Benday.Demo123/src/Benday.Demo123.WebUi'
+  PROJECT_TO_PUBLISH_PATH_2: 'Benday.Demo123/src/Benday.Demo123.Api'
   DOTNET_VERSION: '3.1.301'           # set this to the dot net version to use
   # 
   # I really want to do this but it doesn't seem to work
@@ -73,9 +74,10 @@ jobs:
     #
     #
     # Here is the workaround for my env variable wish
-    - name: set environment variable
-      # run: echo "::set-env name=PUBLISH_TO_PATH::$RUNNER_WORKSPACE/published"
-      run: echo "PUBLISH_TO_PATH=$GITHUB_WORKSPACE/published" >> $GITHUB_ENV
+    - name: set environment variable for publishing path for webui project
+      run: echo "PUBLISH_TO_PATH=$GITHUB_WORKSPACE/webui-published" >> $GITHUB_ENV
+    - name: set environment variable for publishing path for api project
+      run: echo "PUBLISH_TO_PATH_2=$GITHUB_WORKSPACE/api-published" >> $GITHUB_ENV
     - name: print environment vars again
       run: env
     # - name: Setup .NET Core
@@ -107,17 +109,20 @@ jobs:
       working-directory: '${{ github.workspace }}/Benday.Demo123/src/Benday.Demo123.Api'
     - name: Test
       run: dotnet test --no-restore --verbosity normal
-    - name: Publish
+    - name: Publish the web project
       run: dotnet publish --configuration Release -o '${{ env.PUBLISH_TO_PATH }}'
       working-directory: '${{ env.PROJECT_TO_PUBLISH_PATH }}'
-    - name: publish artifact
+    - name: Publish the api project
+      run: dotnet publish --configuration Release -o '${{ env.PUBLISH_TO_PATH_2 }}'
+      working-directory: '${{ env.PROJECT_TO_PUBLISH_PATH_2 }}'
+    - name: publish artifact for web ui
       uses: actions/upload-artifact@v2
       with: 
         name: build-output
         path: '${{ env.PUBLISH_TO_PATH }}'      
-    # - name: 'Run Azure webapp deploy action using publish profile credentials'
-    #   uses: azure/webapps-deploy@v2
-    #   with: 
-    #     app-name: ${{ env.AZURE_WEBAPP_NAME }}
-    #     publish-profile: ${{ secrets.AZUREWEBAPPPUBLISHPROFILE  }} # Define secret variable in repository settings as per action documentation
-    #     package: '${{ env.PUBLISH_TO_PATH }}'
+
+    - name: publish artifact for api project
+      uses: actions/upload-artifact@v2
+      with: 
+        name: build-output-api-project
+        path: '${{ env.PUBLISH_TO_PATH_2 }}'
